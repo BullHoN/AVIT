@@ -1,0 +1,167 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam|Merienda|Kaushan+Script|Courgette|Gloria+Hallelujah|Courgette|Kaushan+Script|Oswald|Permanent+Marker|ZCOOL+KuaiLe');
+body,html{
+  height: 100%;
+}
+.bg-clr{
+  background:transparent;
+}
+#scrol{
+  background-color: black;
+  opacity: 0.9;
+}
+nav>a>small,.modal-header>small,footer>.row>.col>a>small{
+  font-family: 'Permanent Marker', cursive;
+  text-transform: capitalize;
+  font-size:1.3rem;
+  color:#adeef6;
+}
+footer>.row>.col>h1,footer>.row>.col-12>h1{
+  font-family: 'Permanent Marker', cursive;
+  text-transform: capitalize;
+  font-size:2rem;
+  color:#adeef6;
+}
+nav>div>ul>a{
+  font-family: 'Indie Flower', cursive;
+  font-size: 1.8rem;
+  color:#adeef6;
+  text-decoration: none;
+}
+nav>div>ul>a:hover{
+  text-decoration: none;
+  color:#adeef6;
+}
+nav>a>img,.modal-header>img,footer>.row>.col>a>img{
+  width:100px;
+  height: 50px;
+}
+#feature_heading{
+  font-family: 'Kaushan Script', cursive;
+  text-transform: uppercase;
+  font-size: 5rem;
+  color:#33ccff;
+}
+@media screen and (min-width:600px){
+  nav>div>ul>a:hover{
+    text-decoration: none;
+    color:#ddfbff;
+    border-bottom: 2px solid #adeef6;
+  }
+  nav>div>ul>.active{
+    color:#00f6ff;
+    border-bottom: 2px solid #00f6ff;
+  }
+  #feature_heading{
+    font-family: 'Kaushan Script', cursive;
+    text-transform: uppercase;
+    font-size: 7.5rem;
+    color:#33ccff;
+  }
+
+}
+.parallax{
+  background-image: url('back1.jpg');
+  min-height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+.parallax >.container-fluid{
+  position: absolute;
+  top:35%;
+  text-align: center;
+}
+.parallax >.container-fluid>h5{
+  font-family: 'Permanent Marker', cursive;
+  font-size: 2.4rem;
+}
+.parallax >.container-fluid>h1{
+  margin-top: 10%;
+  font-family: 'Courgette', cursive;
+  font-size:1.8rem;
+}
+.parallax >.container-fluid>button{
+font-family: 'Kaushan Script', cursive;
+}
+.modal-body{
+  background-color: #ddfbff;
+  border:none;
+}
+.modal-body>nav>.nav>a{
+  background-color: black;
+  opacity: 0.8;
+  color: white;
+  font-family: 'Courgette', cursive;
+  font-size: 1.8rem;
+}
+.tab-pane>form>label{
+  font-family: 'Gloria Hallelujah', cursive;
+  font-size: 1.8rem;
+  color:#66d9ff;
+}
+.tab-pane>form>.input-group>input{
+  font-family: 'Courgette', cursive;
+  font-size: 1.3rem;
+  opacity: 0.8;
+}
+.tab-pane>form>.input-group>button{
+  font-family: 'Courgette', cursive;
+  font-size: 1.6rem;
+}
+#ggl{
+  font-family: 'Courgette', cursive;
+}
+#ggl>a>span{
+  color:grey;
+}
+#ggl>a>span:hover{
+  color:white;
+}
+.card-title{
+  font-family: 'Kalam', cursive;
+  color:#8c8c8c;
+  font-size: 3rem;
+}
+.card-text{
+  font-family: 'Merienda', cursive;
+  font-size: 1.8rem;
+}
+.parallex2{
+  background-image: url('back6.jpg');
+  min-height: 400px;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+}
+#tribute1,#tribute2{
+  display: none;
+}
+#about_data>div{
+  font-size: 1.5rem;
+}
+#about_data{
+  max-width: 100%;
+}
+@media screen and (min-width:600px){
+  #about_data{
+    max-width: 85%;
+  }
+  #about_data>div{
+    font-size: 1.8rem;
+  }
+}
+#contact h5{
+  font-family: 'Kaushan Script', cursive;
+}
+#contact_link{
+  font-family: 'Kalam', cursive;
+  font-size: 1.5rem;
+}
+#fab{
+  color:grey;
+}
+#fab:hover{
+  color:white;
+}

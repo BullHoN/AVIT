@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    <link rel="stylesheet" href="/mnstyle.css">
+    <title>AVIT</title>
+    <link rel="icon" href="/lgos.png" type="image/png">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-clr fixed-top">
+      <a href="#home" class="navbar-brand ml-0 ml-md-3 mx-auto">
+       <img src="fnlg.png">
+       <small>(Asynchronous versatility)</small>
+      </a>
+      <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar" aria-expended="false">
+       <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbar">
+        <ul class="navbar-nav ml-auto">
+          <a href="#home" class="nav-item active mr-5 mt-2">Home</a>
+          <a href="#features" class="nav-item  mr-5 mt-2">Features</a>
+          <a href="#about" class="nav-item  mr-5 mt-2">About</a>
+          <a href="#contact" class="nav-item  mr-3 mt-2">Contact</a>
+        </ul>
+      </div>
+    </nav>
+    <div class="parallax" id="home">
+      <div class="container-fluid">
+        <h5 class="text-white">searching for a website with social and Developer working features?</h5>
+        <button type="button" class="btn btn-outline-info btn-lg mt-3 mt-md-5" data-toggle="modal" data-target="#login_modal">Register Today</button>
+        <button type="button" class="btn btn-outline-info btn-lg mt-3 mt-md-5 ml-3" data-toggle="modal" data-target="#login_modal">Already a User</button><br>
+        <h1 class="text-white">Learn More About <a href="#features">Features</a></h1>
+      </div>
+    </div>
+    <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header bg-dark">
+            <img src="fnlg.png" class="mx-auto">
+            <small class="mt-2">(Asynchronous versatility)</small>
+            <button type="button" class="close" data-dismiss="modal">
+             <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body mt-0">
+            <nav>
+              <div class="nav nav-tabs" role="tablist">
+                <a href="#nav_login" class="nav-item nav-link w-50" data-toggle="tab" role="tab" id="modal_Login_active">Login</a>
+                <a href="#nav_register" class="nav-item nav-link w-50" data-toggle="tab" role="tab" id="modal_register_active">Register</a>
+              </div>
+            </nav>
+            <div class="tab-content">
+              <div class="tab-pane fade" id="nav_login" role="tabpanel">
+                <form class="mt-4">
+                  <label for="email">Email</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-dark">
+                      <span class="far fa-envelope my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
+                    </div>
+                    <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com">
+                  </div>
+                  <label for="Password" class="mt-2">Password</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-dark">
+                      <span class="fas fa-lock my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
+                    </div>
+                    <input type="password" class="form-control" name="password">
+                  </div>
+                  <a href="#" class="d-block mt-2 lead">Forget password?</a>
+                  <button type="submit" class="btn btn-outline-info btn-lg mt-3">Login</button>
+                </form>
+              </div>
+              <div class="tab-pane fade " id="nav_register" role="tabpanel">
+                <form class="mt-4">
+                  <label for="username">Username</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-dark">
+                      <span class="fa fa-user icon my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
+                    </div>
+                    <input type="text" class="form-control" name="username">
+                  </div>
+                  <label for="email" class="mt-2">Email</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-dark">
+                      <span class="far fa-envelope my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
+                    </div>
+                    <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com">
+                  </div>
+                  <label for="Password" class="mt-2">Password</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-dark">
+                      <span class="fas fa-lock my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
+                    </div>
+                    <input type="password" class="form-control" name="password">
+                  </div>
+                  <label for="Password2" class="mt-2">Conform Password</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend bg-dark">
+                      <span class="fas fa-lock my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
+                    </div>
+                    <input type="password" class="form-control" name="password2">
+                  </div>
+                  <button type="submit" class="btn btn-outline-info btn-lg mt-3">Register</button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer bg-dark text-white">
+            <div class="row text-center w-100 mx-auto">
+              <div class="col-12">
+                <h5 id="ggl">or Connect with <a href="#" ><span class="fab fa-google ml-3 mr-1 mt-3"></span></a> | <a href="#"><span class="fab fa-facebook ml-1 mt-3"></span></a></h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container-fluid text-center mt-5" id="features">
+      <div class="row">
+        <div class="col-12" id="feature_heading">
+          Features
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md">
+          <div class="card" style="border:none;">
+            <i class="fas fa-code card-img-top" style="font-size: 9rem;color:#adeef6"></i>
+            <div class="card-body">
+              <h5 class="card-title">Project Management</h5>
+              <p class="card-text">Major problem during any project development is the Management of project files and team members avit makes it easy as Tik-Tok.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="card" style="border:none;">
+            <i class="fas fa-users" style="font-size: 9rem;color:#adeef6;"></i>
+            <div class="card-body">
+              <h5 class="card-title">Form Groups</h5>
+              <p class="card-text">Too much work is also hazadious as well as frustating avit povides the features of social media so that you can't be boored and explore new people.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-5">
+        <div class="col-md">
+          <div class="card" style="border:none;">
+            <i class="far fa-lightbulb" style="font-size: 9rem;color:#adeef6;"></i>
+            <div class="card-body">
+              <h5 class="card-title">Discuss Idea</h5>
+              <p class="card-text">Having an idea is a great feeling but with proper discussion and planning that could be a million doller idea that's Avit provides you support for making idea rooms.</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md">
+          <div class="card" style="border:none;">
+            <i class="fas fa-gamepad" style="font-size: 9rem;color:#adeef6;"></i>
+            <div class="card-body">
+              <h5 class="card-title">Game Room</h5>
+              <p class="card-text">As it is Already mentioned while working on a project we all have that frustating phase at least once in a day to keep you motivated and Smilling Avit provides feature of mutiplayer gamerooms.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="parallex2 mt-3">
+    </div>
+    <div class="container-fluid text-center mt-5" id="about">
+      <div class="row">
+        <div class="col-12" id="feature_heading">
+          About
+        </div>
+      </div>
+      <div class="row mx-auto" id="about_data">
+        <div class="col card-text text-center">
+          <span class="d-block">This website is specially made for Developers our make objective is to make their life a little easier By Developers we just dont mean fancy coders guys but also for projects like making a new book or someting like that Avit provides with great set of toolls for all kind of Developers. taking about my self would be
+          the most useless thing to do<span id="tribute1">but what i want to mension is my inspiration or whom i would tribute this website i had made a little quote
+          for that luckone.<br><q style="color:#adeef6">unki aakho ki gehraiyo me yss kadar khu kho zata hu mai,sabkuch bhulke unke khavbo me yu khoo zata hu mai</q><br></span>
+          so that's was that lastly thanks to the really cool guy prahkar who always insipred and encourage to learn still most credit goes to <span id="added">...</span></span>
+           <img src="avkb.png" id="tribute2" style="width: 230px;height: 200px;">
+           <form>
+             <input type="text" id="hode" placeholder="All of You" style="border:none;" class="text-center">
+           </form>
+           <span>by the way thanks
+          for visiting.</span>
+        </div>
+      </div>
+    </div>
+    <footer class="mt-5" style="background-color:black;opacity: 0.9;">
+      <div class="row py-5" style="max-width: 100%;" id="contact">
+        <div class="col">
+          <a href="#home" class="navbar-brand ml-0 ml-md-3">
+           <img src="fnlg.png">
+           <small>(Asynchronous versatility)</small>
+         </a><br>
+         <small class="text-white ml-5" style="font-size:1rem;">© 1999-2019</small>
+        </div>
+        <div class="col col-md mt-2 ml-5 ml-md-0">
+          <h1>Features</h1>
+          <h5 style="color:white;">Game Rooms</h5>
+          <h5 style="color:white;">Chat Rooms</h5>
+          <h5 style="color:white;">Group discussion</h5>
+          <h5 style="color:white;">user friendly interface</h5>
+        </div>
+        <div class="col col-md mt-2 ml-5 ml-md-0">
+          <h1>Team</h1>
+          <h5 style="color:white;">Avit(Front-end)</h5>
+          <h5 style="color:white;">Avit(back-end)</h5>
+          <h5 style="color:white;">Avit(design)</h5>
+          <h5 style="color:white;">Avit(idea)</h5>
+        </div>
+        <div class="col-12 col-md mt-2 ml-5 ml-md-0">
+          <h1>About</h1>
+          <h5 style="color:white;">location Guragaav-east(film-city)</h5>
+          <h5 style="color:white;">Avit,Avit,Avit</h5>
+          <h5 style="color:white;">Privacy</h5>
+          <h5 style="color:white;">Policy</h5>
+        </div>
+      </div>
+      <div class="row py-5" style="max-width:100%;">
+        <div class="col-12 text-white text-center" id="contact_link">
+          for any feeback or query contact <span style="text-decoration:underline;color:grey">vaibhavbhardwaaj@gmail.com</span><br>
+          follow us on social media <br>
+          <a href="#" id="fab"><i class="fab fa-instagram"></i></a>  <a href="#" id="fab"><span class="fab fa-facebook ml-1 mt-3"></span></a>
+        </div>
+      </div>
+    </footer>
+    <script src="/main_gg.js">
+    </script>
+  </body>
+</html>
