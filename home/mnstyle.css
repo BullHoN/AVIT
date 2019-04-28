@@ -41,7 +41,7 @@ nav>a>img,.modal-header>img,footer>.row>.col>a>img{
   font-size: 4rem;
   color:#33ccff;
 }
-@media screen and (min-width:600px){
+@media screen and (min-width:700px){
   nav>div>ul>a:hover{
     text-decoration: none;
     color:#ddfbff;
@@ -54,7 +54,7 @@ nav>a>img,.modal-header>img,footer>.row>.col>a>img{
   #feature_heading{
     font-family: 'Kaushan Script', cursive;
     text-transform: uppercase;
-    font-size: 7.5rem;
+    font-size: 7rem;
     color:#33ccff;
   }
 
