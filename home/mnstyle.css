@@ -38,7 +38,7 @@ nav>a>img,.modal-header>img,footer>.row>.col>a>img{
 #feature_heading{
   font-family: 'Kaushan Script', cursive;
   text-transform: uppercase;
-  font-size: 4rem;
+  font-size: 4.4rem;
   color:#33ccff;
 }
 @media screen and (min-width:700px){
