@@ -1,4 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Kalam|Merienda|Kaushan+Script|Courgette|Gloria+Hallelujah|Courgette|Kaushan+Script|Oswald|Permanent+Marker|ZCOOL+KuaiLe');
+*{
+  max-width: 100%;
+  overflow: hidden;
+}
 body,html{
   height: 100%;
 }
