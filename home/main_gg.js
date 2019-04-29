@@ -59,5 +59,15 @@ document.querySelector('#added').addEventListener('click',()=>{
     }
   }
 });
-
+//loader
+function loader(){
+  document.querySelector('.loader').style.display ='none';
+  for(let i=0;i<Array.from(document.querySelectorAll('.shw')).length;i++){
+    if(i==0)
+    Array.from(document.querySelectorAll('.shw'))[0].style.display='flex';
+    else {
+    Array.from(document.querySelectorAll('.shw'))[i].style.display='block'
+    }
+  }
+}
 //form validation

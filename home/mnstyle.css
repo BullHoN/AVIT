@@ -2,14 +2,33 @@
 body,html{
   height: 100%;
 }
+.shw{
+  display: none;
+}
 .bg-clr{
   background:transparent;
+}
+.loader{
+  min-height: 100%;
+  min-width: 100%;
+  background-color: black;
+  z-index: 9999999;
+}
+#fs{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+#sn{
+  position: absolute;
+  top: 43%;
+  left: 42%;
 }
 #scrol{
   background-color: black;
   opacity: 0.9;
 }
-nav>a>small,.modal-header>small,footer>.row>.col>a>small{
+nav>a>small,.modal-header>small,footer>.row>.col>a>small ,#sn{
   font-family: 'Permanent Marker', cursive;
   text-transform: capitalize;
   font-size:1.3rem;
@@ -71,15 +90,11 @@ nav>a>img,.modal-header>img,footer>.row>.col>a>img{
   position: absolute;
   top:35%;
   text-align: center;
+  min-height: 60%;
 }
 .parallax >.container-fluid>h5{
   font-family: 'Permanent Marker', cursive;
   font-size: 2.4rem;
-}
-.parallax >.container-fluid>h1{
-  margin-top: 10%;
-  font-family: 'Courgette', cursive;
-  font-size:1.8rem;
 }
 .parallax >.container-fluid>button{
 font-family: 'Kaushan Script', cursive;
@@ -143,6 +158,14 @@ font-family: 'Kaushan Script', cursive;
 }
 #about_data{
   max-width: 100%;
+}
+.parallax >.container-fluid>.container{
+  position: absolute;
+  bottom: 0px;
+}
+.parallax >.container-fluid>.container>h1{
+  font-family: 'Courgette', cursive;
+  font-size: 1.8rem;
 }
 @media screen and (min-width:600px){
   #about_data{

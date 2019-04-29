@@ -13,8 +13,12 @@
     <title>AVIT</title>
     <link rel="icon" href="/lgos.png" type="image/png">
   </head>
-  <body>
-    <nav class="navbar navbar-expand-md navbar-dark bg-clr fixed-top" style="max-width: 100%;">
+  <body onload="loader()">
+    <div class="loader">
+        <img src="/25.gif" style="width:50px;height: 50px;" id="fs">
+        <h1 id="sn">Great content is comming ...</h1>
+    </div>
+    <nav class="navbar navbar-expand-md navbar-dark bg-clr fixed-top shw" style="max-width: 100%;">
       <a href="#home" class="navbar-brand ml-0 ml-md-3 mx-auto">
        <img src="fnlg.png">
        <small>(Asynchronous versatility)</small>
@@ -31,12 +35,14 @@
         </ul>
       </div>
     </nav>
-    <div class="parallax" id="home" style="max-width: 100%;">
+    <div class="parallax shw" id="home" style="max-width: 100%;">
       <div class="container-fluid">
         <h5 class="text-white">searching for a website with social and Developer working features?</h5>
         <button type="button" class="btn btn-outline-info btn-lg mt-3 mt-md-5" data-toggle="modal" data-target="#login_modal">Register Today</button>
         <button type="button" class="btn btn-outline-info btn-lg mt-3 mt-md-5 ml-3" data-toggle="modal" data-target="#login_modal">Already a User</button><br>
-        <h1 class="text-white">Learn More About <a href="#features">Features</a></h1>
+        <div class="container text-center" style="max-width: 96%;">
+          <h1 class="text-white mx-auto mt-auto">Learn More About <a href="#features">Features</a></h1>
+        </div>
       </div>
     </div>
     <div class="modal fade" id="login_modal" tabindex="-1" role="dialog" aria-hidden="true">
@@ -122,7 +128,7 @@
         </div>
       </div>
     </div>
-    <div class="container-fluid text-center mt-5" id="features">
+    <div class="container-fluid text-center mt-5 shw" id="features">
       <div class="row">
         <div class="col-12" id="feature_heading">
           Features
@@ -169,9 +175,9 @@
         </div>
       </div>
     </div>
-    <div class="parallex2 mt-3" style="max-width: 100%;">
+    <div class="parallex2 mt-3 shw" style="max-width: 100%;">
     </div>
-    <div class="container-fluid text-center mt-5" id="about">
+    <div class="container-fluid text-center mt-5 shw" id="about">
       <div class="row">
         <div class="col-12" id="feature_heading">
           About
@@ -192,7 +198,7 @@
         </div>
       </div>
     </div>
-    <footer class="mt-5" style="background-color:black;opacity: 0.9;">
+    <footer class="mt-5 shw" style="background-color:black;opacity: 0.9;">
       <div class="row py-5" style="max-width: 100%;" id="contact">
         <div class="col">
           <a href="#home" class="navbar-brand ml-0 ml-md-3">
