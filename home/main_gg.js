@@ -69,6 +69,5 @@ function loader(){
     Array.from(document.querySelectorAll('.shw'))[i].style.display='block'
     }
   }
-  alert('loaded');
 }
 //form validation
