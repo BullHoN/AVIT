@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -70,49 +70,61 @@
                     <div class="input-group-prepend bg-dark">
                       <span class="far fa-envelope my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
                     </div>
-                    <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com">
+                    <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com" required>
                   </div>
                   <label for="Password" class="mt-2">Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
                       <span class="fas fa-lock my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
                     </div>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password" required>
                   </div>
                   <a href="#" class="d-block mt-2 lead">Forget password?</a>
                   <button type="submit" class="btn btn-outline-info btn-lg mt-3">Login</button>
                 </form>
               </div>
               <div class="tab-pane fade " id="nav_register" role="tabpanel">
+                <div class="new_user mt-3" style="display:none; ">
+                  <p style="color:green;font-family: 'Courgette', cursive;font-size: 1.2rem;">You are successfully connected plese check your email</p>
+                  <p style="font-family: 'Courgette', cursive;font-size: 1.4rem;">Not got a mail try to login</p>
+                </div>
                 <form class="mt-4">
                   <label for="username">Username</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
                       <span class="fa fa-user icon my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
                     </div>
-                    <input type="text" class="form-control" name="username">
+                    <input type="text" class="form-control" name="username" required>
+                    <div class="input-group-append ml-2" style="display:none;">
+                      <div class="spinner-border text-info mt-1" role="status">
+                      </div>
+                    </div>
                   </div>
+                  <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="user_name"></p>
                   <label for="email" class="mt-2">Email</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
                       <span class="far fa-envelope my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
                     </div>
-                    <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com">
+                    <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com" required>
                   </div>
+                  <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="user_email"></p>
                   <label for="Password" class="mt-2">Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
                       <span class="fas fa-lock my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
                     </div>
-                    <input type="password" class="form-control" name="password">
+                    <input type="password" class="form-control" name="password" required>
                   </div>
+                  <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="not_match1">Password do not match</p>
                   <label for="Password2" class="mt-2">Conform Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
                       <span class="fas fa-lock my-auto px-2 mr-1" style="font-size: 30px;color:white"></span>
                     </div>
-                    <input type="password" class="form-control" name="password2">
+                    <input type="password" class="form-control" name="password2" required>
                   </div>
+                  <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="not_match">Password do not match</p>
                   <button type="submit" class="btn btn-outline-info btn-lg mt-3">Register</button>
                 </form>
               </div>
