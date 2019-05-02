@@ -50,19 +50,18 @@ route.get('/verify/:email/:source',(req,res)=>{
   res.header('Pragma','no-cache');
   let email = req.params.email+'@'+req.params.source+'.com';
   User.findOne({email:email}).then((user)=>{
-    if(!user){
-		//console.log('link not authorized');
-    }else{
-      if(req.query.lnk == user.verfiy_url){
-        user.isverified = true;
-        user.save().then(()=>{
-			res.redirect('/');
-			//console.log('you can login now');
-        }).catch((err)=> {if (err) throw err;});
-      }else{
-		  //console.log('wrong verification id');
-      }
+    if(user){
+    if(req.query.lnk == user.verfiy_url){
+      user.isverified = true;
+      user.save().then(()=>{
+    res.redirect('/');
+      console.log('you can login now');
+      }).catch((err)=> {if (err) throw err;});
+    }else {
+      console.log('some error');
     }
+    res.redirect('/');
+  }
   });
 });
 module.exports = route;
