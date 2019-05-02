@@ -6,7 +6,7 @@ const nodemailer = require('nodemailer');
 
 route.post('/',(req,res)=>{
   if (req.body.check == 'username') {
-    console.log(req.body.username);
+    //console.log(req.body.username);
     User.findOne({username:req.body.username}).then((user)=>{
       if(user){
         res.json({status:false});
@@ -15,7 +15,7 @@ route.post('/',(req,res)=>{
       }
     });
   }else if (req.body.check == 'email') {
-    console.log(req.body.email);
+    //console.log(req.body.email);
     User.findOne({email:req.body.email}).then((user)=>{
       if(user){
         res.json({status:false});
@@ -25,7 +25,7 @@ route.post('/',(req,res)=>{
     });
   }
   else{
-    console.log('submited');
+    //console.log('submited');
     res.json({status:true});
     const nwuser = new User({
       username:req.body.username,
@@ -39,7 +39,7 @@ route.post('/',(req,res)=>{
       nwuser.password = hash;
       nwuser.save().then(()=>{
       require('./mail')(nodemailer,req.body.email,req.body.username);
-      }).catch((err)=>console.log(err));
+      }).catch((err)=>if (err) throw err);
       });
     });
 }
@@ -51,16 +51,16 @@ route.get('/verify/:email/:source',(req,res)=>{
   let email = req.params.email+'@'+req.params.source+'.com';
   User.findOne({email:email}).then((user)=>{
     if(!user){
-		console.log('link not authorized');
+		//console.log('link not authorized');
     }else{
       if(req.query.lnk == user.verfiy_url){
         user.isverified = true;
         user.save().then(()=>{
 			res.redirect('/');
-			console.log('you can login now');
-        }).catch((err)=> console.log(err));
+			//console.log('you can login now');
+        }).catch((err)=> if (err) throw err);
       }else{
-		  console.log('wrong verification id');
+		  //console.log('wrong verification id');
       }
     }
   });
