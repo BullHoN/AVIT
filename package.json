@@ -22,5 +22,5 @@
     "nodemailer": "^6.1.1",
     "passport": "^0.4.0",
     "randomstring": "^1.1.5"
-  },
+  }
 }
