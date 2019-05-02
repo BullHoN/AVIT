@@ -30,8 +30,8 @@ module.exports = function (nodemailer,email,username) {
     console.log('message send');
     User.findOne({email:email}).then((user)=>{
       user.verfiy_url = value;
-      user.save().catch((err)=> if (err) throw err);
-    }).catch((err)=> if (err) throw err);
+      user.save().catch((err)=> {if (err) throw err;});
+    }).catch((err)=> {if (err) throw err;});
   });
 });
 }

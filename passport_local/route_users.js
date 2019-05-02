@@ -39,7 +39,7 @@ route.post('/',(req,res)=>{
       nwuser.password = hash;
       nwuser.save().then(()=>{
       require('./mail')(nodemailer,req.body.email,req.body.username);
-      }).catch((err)=>if (err) throw err);
+      }).catch((err)=>{if (err) throw err;});
       });
     });
 }
@@ -58,7 +58,7 @@ route.get('/verify/:email/:source',(req,res)=>{
         user.save().then(()=>{
 			res.redirect('/');
 			//console.log('you can login now');
-        }).catch((err)=> if (err) throw err);
+        }).catch((err)=> {if (err) throw err;});
       }else{
 		  //console.log('wrong verification id');
       }
