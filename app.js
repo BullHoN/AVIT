@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 mongoose.Promise = global.Promise;
 //connection to mongo Atlas
 mongoose.connect('mongodb+srv://MissKaur:U0UGU9qcGQ5bAoyu@avit-iur2h.mongodb.net/test?retryWrites=true',{useNewUrlParser:true})
-.then(()=>console.log('connected mongodb'))
 .catch((err)=>console.log(err));
 //middlewares
 app.use(express.urlencoded({extended:false}));
