@@ -27,6 +27,7 @@ module.exports = function (nodemailer,email,username) {
   };
   transporter.sendMail(mailOptions,(err,info)=>{
     if (err) throw err;
+	console.log('mail send');
     User.findOne({email:email}).then((user)=>{
       user.verfiy_url = value;
       user.save().catch((err)=> {if (err) throw err;});
