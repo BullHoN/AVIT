@@ -53,10 +53,10 @@ route.get('/verify/:email/:source',(req,res)=>{
     if(user){
     if(req.query.lnk == user.verfiy_url){
       user.isverified = true;
-      user.save().then(()=>{
-    res.redirect('/');
-      console.log('you can login now');
-      }).catch((err)=> {if (err) throw err;});
+      user.save()
+      .catch((err)=> {if (err) throw err;});
+	  console.log('login worked');
+	  res.redirect('/');
     }else {
       console.log('some error');
     }
