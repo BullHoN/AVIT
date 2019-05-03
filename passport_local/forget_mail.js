@@ -15,7 +15,7 @@ module.exports = function (nodemailer,email,username,password) {
   let mailOptions = {
     from: '"AVIT" <vaibhavbhardwaaj@gmail.com>',
     to: email,
-    subject: 'Email verification',
+    subject: 'password changed',
     html: data
   };
   transporter.sendMail(mailOptions,(err,info)=>{
