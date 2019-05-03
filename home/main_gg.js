@@ -219,9 +219,9 @@ document.querySelector('#nav_register input[type=email]').addEventListener('keyu
       success:function(data) {
         if (data.status) {
           document.querySelector('.new_user').style.display ='block';
-          $('form input[type="text"]').prop("disabled", true);
-          $('form input[type="email"]').prop("disabled", true);
-          $('form input[type="password"]').prop("disabled", true);
+          $('#nav_register input[type="text"]').prop("disabled", true);
+          $('#nav_register input[type="email"]').prop("disabled", true);
+          $('#nav_register input[type="password"]').prop("disabled", true);
           console.log('its new user');
         }else {
           console.log('existing user');
@@ -231,4 +231,104 @@ document.querySelector('#nav_register input[type=email]').addEventListener('keyu
   }else {
     evnt.preventDefault();
   }
+});
+//login form
+let login_email_check=false;
+document.querySelector('#nav_login input[type=email]').addEventListener('keyup',()=>{
+  if(document.querySelector('#nav_login input[type=email]').value.includes('@') && document.querySelector('#nav_login input[type=email]').value.includes('.com')){
+    email_wait=4000;
+    setTimeout(function () {
+      $.ajax({
+        type: 'POST',
+        url: '/',
+        data:{check:'email',email:document.querySelector('#nav_login input[type=email]').value},
+        success:function(data) {
+          if (data.status) {
+            document.querySelector('#nav_login input[type=email]').style.border = '2px solid #ff3333';
+            document.querySelector('#login_email').style.display = 'block';
+            document.querySelector('#login_email').textContent = 'Not registered';
+            login_email_check=false;
+            console.log('email is new so dont login');
+          }else {
+            document.querySelector('#nav_login input[type=email]').style.border = '2px solid green';
+            document.querySelector('#login_email').style.display = 'none';
+            login_email_check=true;
+            console.log('email already Register can login');
+          }
+        }
+      });
+    }, email_wait);
+  }
+});
+//login submit
+document.querySelector('#nav_login').addEventListener('submit',function(evnt) {
+if(login_email_check){
+  evnt.preventDefault();
+  const email = document.querySelector('#nav_login input[type=email]').value;
+  const password = document.querySelector('#nav_login input[type=password]').value;
+  $.ajax({
+    type: 'POST',
+    url: '/login',
+    data:{email:email,password:password},
+    success:function (data) {
+      if(!data.status){
+        if(data.mssg == 'email not verified'){
+          document.querySelector('#wrong_user').style.display = 'block';
+          document.querySelector('#wrong_user').innerHTML = '<span>email is not verified <a href="/zalzera" style="color:grey" id="verfiy_again">Verify now</a></span>';
+          //send mail again
+          document.querySelector('#verfiy_again').addEventListener('click',(evnt)=>{
+            evnt.preventDefault();
+            const email = document.querySelector('#nav_login input[type=email]').value;
+            $.ajax({
+              type: 'POST',
+              url: '/zalzera',
+              data:{email:email,username:email}
+            });
+            document.querySelector('#email_send').style.display = 'block';
+            document.querySelector('#email_send').textContent = 'email has send redirecting to homepage';
+            setTimeout(function () {
+              window.location.href = "/";
+            }, 2000);
+          });
+        }else {
+          document.querySelector('#wrong_user').style.display = 'block';
+          document.querySelector('#wrong_user').textContent = 'wrong password';
+        }
+      }else {
+        window.location.href = "/dashbord";
+      }
+    }
+  });
+}else {
+  evnt.preventDefault();
+}
+});
+//forget password
+document.querySelector('#forget_password').addEventListener('click',(evnt)=>{
+  evnt.preventDefault();
+  document.querySelector('#nav_login label[for=Password]').textContent = 'Enter new password';
+  document.querySelector('#modal_Login_active').textContent = 'forget password';
+  document.querySelector('#send_mail').style.display = 'inline-block';
+  document.querySelector('#nav_login button[type=submit]').style.display = 'none';
+  document.querySelector('#forget_password').textContent = '';
+});
+document.querySelector('#send_mail').addEventListener('click',(evnt)=>{
+  const email = document.querySelector('#nav_login input[type=email]').value;
+  const password = document.querySelector('#nav_login input[type=password]').value;
+  evnt.preventDefault();
+  $.ajax({
+    type: 'POST',
+    url: '/forget',
+    data:{email:email,password:password},
+    success:function (data) {
+      if(data.status == 'email send'){
+        document.querySelector('#email_send').textContent = 'password has changed';
+        document.querySelector('#email_send').style.color = 'green';
+        document.querySelector('#email_send').style.display = 'block';
+        setTimeout(function () {
+          window.location.href = "/";
+        }, 2000);
+      }
+    }
+  });
 });

@@ -65,6 +65,7 @@
             <div class="tab-content">
               <div class="tab-pane fade" id="nav_login" role="tabpanel">
                 <form class="mt-4">
+                  <p style="display:none;color:grey;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="email_send"></p>
                   <label for="email">Email</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
@@ -72,6 +73,7 @@
                     </div>
                     <input type="email" class="form-control" name="email" placeholder="Avit@gmail.com" required>
                   </div>
+                  <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="login_email"></p>
                   <label for="Password" class="mt-2">Password</label>
                   <div class="input-group">
                     <div class="input-group-prepend bg-dark">
@@ -79,7 +81,9 @@
                     </div>
                     <input type="password" class="form-control" name="password" required>
                   </div>
-                  <a href="#" class="d-block mt-2 lead">Forget password?</a>
+                  <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="wrong_user">Password do not match</p>
+                  <a href="#" class="d-block mt-2 lead" id="forget_password">Forget password?</a>
+                  <a href="/forget" id="send_mail" class="btn btn-outline-info btn-lg mt-3" style="display:none;">change password</a>
                   <button type="submit" class="btn btn-outline-info btn-lg mt-3">Login</button>
                 </form>
               </div>

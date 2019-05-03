@@ -3,7 +3,8 @@ const bcrypt = require('bcrypt');
 const route = express.Router();
 const User = require('./modal_user');
 const nodemailer = require('nodemailer');
-
+const passport = require('passport');
+const {ensureAuthentication} = require('./auth_local');
 route.post('/',(req,res)=>{
   if (req.body.check == 'username') {
     //console.log(req.body.username);
@@ -15,11 +16,13 @@ route.post('/',(req,res)=>{
       }
     });
   }else if (req.body.check == 'email') {
-    //console.log(req.body.email);
+    console.log(req.body.email);
     User.findOne({email:req.body.email}).then((user)=>{
       if(user){
+        console.log('existing user');
         res.json({status:false});
       }else {
+        console.log('new user');
         res.json({status:true});
       }
     });
@@ -62,6 +65,65 @@ route.get('/verify/:email/:source',(req,res)=>{
     }
     res.redirect('/');
   }
+  });
+});
+//login verification
+route.post('/login',(req,res,next)=>{
+  console.log(req.body);
+ passport.authenticate('local',(err,user,info)=>{
+   if(err){
+     return next(err);
+   }
+   User.findOne({email:user.email}).then((user1)=>{
+     if(user1.isverified == 'true'){
+       return res.json({status:false,mssg:'email not verified'});
+     }
+   }).catch((err)=>console.log(err));
+   if(!user){
+     console.log('not a registered user');
+     return res.json({status:false});
+   }
+   req.logIn(user, function(err) {
+    if (err) { return next(err); }
+    console.log('can login');
+    return res.json({status:true});
+  });
+ })(req,res,next);
+});
+route.get('/dashbord',ensureAuthentication,(req,res)=>{
+  res.header('Cache-Control','private,no-cache,no-store,must-revalidate');
+  res.header('Expires','-1');
+  res.header('Pragma','no-cache');
+  res.render('dashbord',{user:req.user});
+});
+
+route.post('/zalzera',(req,res)=>{
+  require('./mail')(nodemailer,req.body.email,req.body.username);
+});
+//logout
+route.get('/logout',(req,res)=>{
+  req.logout();
+  console.log('succesfully logout');
+  res.redirect('/');
+});
+//forget password
+route.post('/forget',(req,res)=>{
+  User.findOne({email:req.body.email}).then((user)=>{
+    if(!user){
+      res.json({status:'not find email'});
+    }else {
+      bcrypt.genSalt(10,(err,salt)=>{
+        if (err) throw err;
+        bcrypt.hash(req.body.password,salt,(err,hash)=>{
+          user.password = hash;
+          user.save().then(()=>{
+            console.log('send mail');
+            require('./forget_mail')(nodemailer,req.body.email,user.username,req.body.password);
+            res.json({status:'email send'});
+          }).catch((err)=>console.log(err));
+        });
+      });
+    }
   });
 });
 module.exports = route;
