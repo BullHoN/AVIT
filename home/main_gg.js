@@ -311,6 +311,8 @@ document.querySelector('#forget_password').addEventListener('click',(evnt)=>{
   document.querySelector('#send_mail').style.display = 'inline-block';
   document.querySelector('#nav_login button[type=submit]').style.display = 'none';
   document.querySelector('#forget_password').textContent = '';
+  document.querySelector('#login_password').textContent = 'Login?';
+  document.querySelector('#login_password').style.display = 'block';
 });
 document.querySelector('#send_mail').addEventListener('click',(evnt)=>{
   const email = document.querySelector('#nav_login input[type=email]').value;
@@ -331,4 +333,15 @@ document.querySelector('#send_mail').addEventListener('click',(evnt)=>{
       }
     }
   });
+});
+document.querySelector('#login_password').addEventListener('click',(evnt)=>{
+  evnt.preventDefault();
+  document.querySelector('#nav_login label[for=Password]').textContent = 'Enter password';
+  document.querySelector('#modal_Login_active').textContent = 'Login';
+  document.querySelector('#nav_login button[type=submit]').style.display = 'block';
+  document.querySelector('#forget_password').style.display = 'block';
+  document.querySelector('#send_mail').style.display = 'none';
+  document.querySelector('#forget_password').textContent = 'Forget password?';
+  document.querySelector('#login_password').style.display = 'none';
+  document.querySelector('#login_password').textContent = '';
 });

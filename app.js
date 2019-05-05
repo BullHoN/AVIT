@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const Session = require('express-session');
 require('./passport_local/user_config').passport(passport);
+const passportSetup = require('./passport_goggle/config_goggle');
 mongoose.Promise = global.Promise;
 //connection to mongo Atlas
 mongoose.connect('mongodb+srv://MissKaur:U0UGU9qcGQ5bAoyu@avit-iur2h.mongodb.net/test?retryWrites=true',{useNewUrlParser:true})
@@ -24,6 +25,7 @@ app.set('view engine','ejs');
 app.use('/',express.static('home'));
 
 //passport route
+app.use('/oauth',require('./passport_goggle/goggle_route'));
 app.use('/',require('./passport_local/route_users'));
 //routes
 app.get('/',(req,res)=>{

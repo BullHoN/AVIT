@@ -90,10 +90,12 @@ route.post('/login',(req,res,next)=>{
   });
  })(req,res,next);
 });
+
 route.get('/dashbord',ensureAuthentication,(req,res)=>{
   res.header('Cache-Control','private,no-cache,no-store,must-revalidate');
   res.header('Expires','-1');
   res.header('Pragma','no-cache');
+  console.log(req.user);
   res.render('dashbord',{user:req.user});
 });
 

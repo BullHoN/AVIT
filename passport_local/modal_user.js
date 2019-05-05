@@ -12,7 +12,6 @@ const userScma = mongoose.Schema({
   },
   password:{
     type:String,
-    required:true
   },
   isverified:{
     type:Boolean,
