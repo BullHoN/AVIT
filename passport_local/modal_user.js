@@ -23,6 +23,6 @@ const userScma = mongoose.Schema({
   }
 });
 
-const User = mongoose.model('user',userScma);
+const User = mongoose.model('change_user',userScma);
 
 module.exports = User;

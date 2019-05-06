@@ -1,6 +1,6 @@
 const localstrategy = require('passport-local').Strategy;
 const mongoose = require('mongoose');
-const User = require('./modal_user');
+const User = require('../oauth_models/local_model');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 

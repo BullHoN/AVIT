@@ -1,5 +1,5 @@
 const passport = require('passport');
-const User = require('../passport_local/modal_user');
+const User = require('../oauth_models/local_model');
 const nodemailer = require('nodemailer');
 const GoggleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -19,14 +19,15 @@ passport.use(new GoggleStrategy({
   clientSecret: 'c0mlNt7C_R2TiMebm-ez8jE0'
 },(accessToken,refreshToken,profile,done)=>{
   console.log(profile);
-  User.findOne({email:profile.emails[0].value}).then((user)=>{
+  User.findOne({google_facebook_id:profile.id}).then((user)=>{
     if(user){
       console.log('user already existied');
       done(null,user);
     }else {
       const newuser = new User({
-        email:profile.emails[0].value,
         isverified:true,
+        google_facebook_id:profile.id,
+        email:profile.emails[0].value,
         username:'newuser_' + profile.id
       });
       newuser.save().then((nwuser)=>{

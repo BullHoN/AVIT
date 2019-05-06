@@ -6,6 +6,7 @@ const Session = require('express-session');
 require('./passport_local/user_config').passport(passport);
 const passportSetup = require('./passport_goggle/config_goggle');
 const facebooksetup = require('./passport_facebook/facebook_config');
+
 mongoose.Promise = global.Promise;
 //connection to mongo Atlas
 mongoose.connect('mongodb+srv://MissKaur:U0UGU9qcGQ5bAoyu@avit-iur2h.mongodb.net/test?retryWrites=true',{useNewUrlParser:true})

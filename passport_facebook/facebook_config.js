@@ -1,5 +1,5 @@
 const FacebookStrategy = require('passport-facebook').Strategy;
-const User = require('../passport_local/modal_user');
+const User = require('../oauth_models/local_model');
 const nodemailer = require('nodemailer');
 const passport = require('passport');
 

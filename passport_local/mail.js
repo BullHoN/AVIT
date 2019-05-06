@@ -1,4 +1,4 @@
-const User = require('./modal_user');
+const User = require('../oauth_models/local_model');
 const ejs = require('ejs');
 const path = require('path');
 const randomstring = require('randomstring');
