@@ -63,7 +63,6 @@ route.get('/verify/:email/:source',(req,res)=>{
     }else {
       console.log('some error');
     }
-    res.redirect('/');
   }
   });
 });
