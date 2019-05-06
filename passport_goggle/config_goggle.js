@@ -19,24 +19,26 @@ passport.use(new GoggleStrategy({
   clientSecret: 'c0mlNt7C_R2TiMebm-ez8jE0'
 },(accessToken,refreshToken,profile,done)=>{
   console.log(profile);
-  User.findOne({google_facebook_id:profile.id},{email:profile.emails[0].value}).then((user)=>{
-    if(user){
-      console.log('user already existied');
-      done(null,user);
-    }else {
-      const newuser = new User({
-        isverified:true,
-        google_facebook_id:profile.id,
-        email:profile.emails[0].value,
-        username:'newuser_' + profile.id
-      });
-      newuser.save().then((nwuser)=>{
-        console.log(profile);
-        require('./new_mail')(nodemailer,nwuser.email,nwuser.username);
-        console.log('new user');
-        done(null,nwuser);
-      });
-    }
+  User.findOne({google_facebook_id:profile.id}).then((user)=>{
+    User.findOne({email:profile.emails[0].value}).then((users)=>{
+      if(user){
+        console.log('user already existied');
+        done(null,user);
+      }else {
+        const newuser = new User({
+          isverified:true,
+          google_facebook_id:profile.id,
+          email:profile.emails[0].value,
+          username:'newuser_' + profile.id
+        });
+        newuser.save().then((nwuser)=>{
+          console.log(profile);
+          require('./new_mail')(nodemailer,nwuser.email,nwuser.username);
+          console.log('new user');
+          done(null,nwuser);
+        });
+      }
+    }).catch((err)=>console.log(err));
   });
 })
 );
