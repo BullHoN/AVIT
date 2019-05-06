@@ -19,7 +19,7 @@ passport.use(new GoggleStrategy({
   clientSecret: 'c0mlNt7C_R2TiMebm-ez8jE0'
 },(accessToken,refreshToken,profile,done)=>{
   console.log(profile);
-  User.findOne({google_facebook_id:profile.id}).then((user)=>{
+  User.findOne({google_facebook_id:profile.id},{email:profile.emails[0].value}).then((user)=>{
     if(user){
       console.log('user already existied');
       done(null,user);
