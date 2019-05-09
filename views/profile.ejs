@@ -55,7 +55,7 @@
     </div>
       <div class="container mb-5 shw">
         <div class="row justify-content-center">
-          <div class="col-3" id="username">
+          <div class="col-8 col-md-3" id="username">
             <form>
               <label for="Username">Username</label>
               <div class="input-group">
@@ -69,7 +69,7 @@
             </form>
             <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="user_name"></p>
           </div>
-          <div class="col-3">
+          <div class="col-8 col-md-3">
             <form>
               <label for="Email">Email</label>
                 <input type="email" name="email" class="form-control" value="<%= user.email %>">
@@ -77,7 +77,7 @@
           </div>
         </div>
       <div class="row justify-content-center mt-3">
-        <div class="col-6">
+        <div class="col-8 col-md-6">
           <form>
             <label for="hobbies">Hobbies(seprated by coma)</label>
             <input type="text" class="form-control" name="hobbies" placeholder="singing,dancing,writing,tikTok" value="<%= user.about.hobbies %>">
@@ -85,7 +85,7 @@
         </div>
       </div>
       <div class="row justify-content-center mt-3">
-        <div class="col-6">
+        <div class="col-8 col-md-6">
           <form>
             <label for="Profession">Profession</label>
             <input type="text" class="form-control" name="Profession" placeholder="full stack web developer" value="<%= user.about.achivements %>">
@@ -93,7 +93,7 @@
         </div>
       </div>
       <div class="row justify-content-center mt-3">
-        <div class="col-6">
+        <div class="col-8 col-md-6">
           <form>
             <label for="intrests">Intrest(seprated by coma)</label>
             <input type="text" class="form-control" name="intrests" placeholder="nodejs,python,java,tikTok" value="<%= user.about.intrests %>">
@@ -101,7 +101,7 @@
         </div>
       </div>
       <div class="row justify-content-center mt-3">
-        <div class="col-6">
+        <div class="col-8 col-md-6">
           <form>
             <label for="education">Education</label>
             <input type="text" class="form-control" name="education" placeholder="phd in instagram" value="<%= user.about.education %>">
@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="row justify-content-center mt-3">
-        <div class="col-6">
+        <div class="col-8 col-md-6">
             <button type="submit" class="btn btn-primary btn-block" name="button" id="submit">Save</button>
         </div>
       </div>
