@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/profile_setting.css">
+    <title>Profile</title>
+    <style>
+    .loader{
+      min-height: 100vh;
+      min-width: 100%;
+      display:none;
+      background-color: black;
+      z-index: 99999;
+    }
+    #fs{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+    }
+    #sn{
+      position: absolute;
+      top: 30%;
+      left: 49%;
+    }
+    </style>
+  </head>
+  <body class="bg-light">
+    <div class="loader">
+        <img src="/25.gif" style="width:50px;height: 50px;" id="fs">
+        <img id="sn" src="/lgos.png" style="width:80px;height:80px;">
+    </div>
+    <nav class="navbar bg-white shadow-sm shw">
+      <a href="#home" class="navbar-brand ml-0 ml-md-3 mx-auto">
+       <img src="/fnlg.png">
+       <small>(Asynchronous versatility)</small>
+      </a>
+      <div class="dropdown dropleft mr-5">
+        <img class="dropdown-toggle rounded-circle" style="width:40px;heigth:40px;" src="lgos.png" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+          <a class="dropdown-item" href="/dashbord">Dashbord</a>
+          <a class="dropdown-item" href="#">Profile Setting</a>
+          <a class="dropdown-item" href="/logout">Logout</a>
+       </div>
+     </div>
+    </nav>
+    <div class="jumbotron text-center shw">
+      <h1 class="display-3" style="text-transform:uppercase;">User Profile</h1>
+      <p class="lead">Ubdate your profile for relevence and enhance presonalize experience</p>
+    </div>
+      <div class="container mb-5 shw">
+        <div class="row justify-content-center">
+          <div class="col-3" id="username">
+            <form>
+              <label for="Username">Username</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    @
+                  </div>
+                </div>
+                <input type="text" name="username" class="form-control" value="<%= user.username %>">
+              </div>
+            </form>
+            <p style="display:none;color:#ff3333;font-family: 'Courgette', cursive;font-size: 1.3rem;" id="user_name"></p>
+          </div>
+          <div class="col-3">
+            <form>
+              <label for="Email">Email</label>
+                <input type="email" name="email" class="form-control" value="<%= user.email %>">
+            </form>
+          </div>
+        </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-6">
+          <form>
+            <label for="hobbies">Hobbies(seprated by coma)</label>
+            <input type="text" class="form-control" name="hobbies" placeholder="singing,dancing,writing,tikTok" value="<%= user.about.hobbies %>">
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-6">
+          <form>
+            <label for="Profession">Profession</label>
+            <input type="text" class="form-control" name="Profession" placeholder="full stack web developer" value="<%= user.about.achivements %>">
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-6">
+          <form>
+            <label for="intrests">Intrest(seprated by coma)</label>
+            <input type="text" class="form-control" name="intrests" placeholder="nodejs,python,java,tikTok" value="<%= user.about.intrests %>">
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-6">
+          <form>
+            <label for="education">Education</label>
+            <input type="text" class="form-control" name="education" placeholder="phd in instagram" value="<%= user.about.education %>">
+          </form>
+        </div>
+      </div>
+      <div class="row justify-content-center mt-3">
+        <div class="col-6">
+            <button type="submit" class="btn btn-primary btn-block" name="button" id="submit">Save</button>
+        </div>
+      </div>
+      </div>
+      <script>
+      let username_check=false,usr_name='',time_user=5000;
+      $('#username input[type=text]').blur(()=>{
+        if(document.querySelector('#username input[type=text]').value.length>5 && document.querySelector('#username input[type=text]').value!=usr_name){
+          usr_name = document.querySelector('#username input[type=text]').value;
+          document.querySelector('#username #user_name').style.display = 'none';
+          $('#username input[type="text"]').prop("disabled", true);
+          $.ajax({
+            type: 'POST',
+            url: '/',
+            data:{check:'username',username:document.querySelector('#username input[type=text]').value},
+            success:function(data) {
+              if (data.status) {
+                username_check=true;
+                document.querySelector('#username input[type=text]').style.border = '2px solid green';
+                $('form input[type="text"]').prop("disabled", false);
+                document.querySelector('#username #user_name').style.display = 'block';
+                document.querySelector('#username #user_name').style.color = 'green';
+                document.querySelector('#username #user_name').textContent = 'Name is available';
+                console.log('username is avilable');
+              }else {
+                username_check=false;
+                document.querySelector('#username input[type=text]').style.border = '2px solid #ff3333';
+                $('form input[type="text"]').prop("disabled", false);
+                document.querySelector('#username #user_name').style.display = 'block';
+                document.querySelector('#username #user_name').style.color = 'red';
+                document.querySelector('#username #user_name').textContent = 'Name not is available';
+                console.log('username not avilable');
+              }
+            }
+          });
+      }else if(username_check==false){
+        if(document.querySelector('#username input[type=text]').value==''){
+          document.querySelector('#username #user_name').style.display = 'none';
+          document.querySelector('#username input[type=text]').style.border = '1px solid #cccccc';
+        }
+        else {
+          document.querySelector('#username input[type=text]').style.border = '2px solid #ff3333';
+          document.querySelector('#username #user_name').style.display = 'block';
+          document.querySelector('#username #user_name').style.color = 'red';
+          document.querySelector('#username #user_name').textContent = 'too short';
+        }
+      }
+      });
+      document.querySelector('#submit').addEventListener('click',(evnt)=>{
+        evnt.preventDefault();
+        $.ajax({
+          type: 'POST',
+          url: '/profile',
+          data:{
+            username:document.querySelector('input[name="username"]').value,
+            email:document.querySelector('input[name="email"]').value,
+            hobbies:document.querySelector('input[name="hobbies"]').value,
+            profession:document.querySelector('input[name="Profession"]').value,
+            intrests:document.querySelector('input[name="intrests"]').value,
+            education:document.querySelector('input[name="education"]').value
+          },
+          success: function(data){
+            console.log(data);
+            Array.from(document.querySelectorAll('.shw')).forEach((hide)=>{
+              hide.style.display = 'none';
+            });
+            document.querySelector('.loader').style.display ='block';
+            setTimeout(function(){
+            document.location.reload(true);
+          },2000);
+          }
+        })
+      });
+      </script>
+  </body>
+</html>

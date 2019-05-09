@@ -1,0 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Kalam|Merienda|Kaushan+Script|Courgette|Gloria+Hallelujah|Courgette|Kaushan+Script|Oswald|Permanent+Marker|ZCOOL+KuaiLe');
+nav>a>img{
+  width:100px;
+  height: 50px;
+}
+nav>a>small{
+  font-family: 'Permanent Marker', cursive;
+  text-transform: capitalize;
+  font-size:1.3rem;
+  color:#adeef6;
+}

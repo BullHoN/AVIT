@@ -36,7 +36,7 @@ const local_Scma = mongoose.Schema({
 
   friends:[friendsScma],
 
-  profilepick:[{url:String}],
+  profilepick:{url:String},
 
   images:[{filename:String}],
 
@@ -47,10 +47,10 @@ const local_Scma = mongoose.Schema({
   projects:[projectScma],
 
   about:{
-    intrests:[{name:String}],
-    hobbies:[{name:String}],
-    education:[{name:String}],
-    achivements:[{name:String}]
+    intrests:{type:String},
+    hobbies:{type:String},
+    education:{type:String},
+    achivements:{type:String}
   }
 });
 

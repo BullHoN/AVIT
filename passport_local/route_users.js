@@ -127,4 +127,43 @@ route.post('/forget',(req,res)=>{
     }
   });
 });
+//profile
+route.get('/profile',ensureAuthentication,(req,res)=>{
+  res.header('Cache-Control','private,no-cache,no-store,must-revalidate');
+  res.header('Expires','-1');
+  res.header('Pragma','no-cache');
+  res.render('profile',{user:req.user});
+});
+
+route.post('/profile',ensureAuthentication,(req,res)=>{
+  res.header('Cache-Control','private,no-cache,no-store,must-revalidate');
+  res.header('Expires','-1');
+  res.header('Pragma','no-cache');
+  console.log(req.body);
+  let hobbies = req.body.hobbies.split(',');
+  console.log(hobbies);
+  res.json({data:'this is working fine'});
+  User.findOne({username:req.user.username}).then((user)=>{
+    if(user.username!=req.body.username){
+      user.username = req.body.username;
+    }
+    if(req.body.email !='' && req.body.email!=user.email){
+      user.email = req.body.email;
+    }
+    if(req.body.hobbies !='' && req.body.hobbies!=user.about.hobbies){
+      user.about.hobbies = req.body.hobbies;
+    }
+    if(req.body.intrests !='' && req.body.intrests!=user.about.intrests){
+      user.about.intrests = req.body.intrests;
+    }
+    if(req.body.profession !='' && req.body.profession!=user.about.achivements){
+      user.about.achivements = req.body.profession;
+    }
+    if(req.body.education !='' && req.body.education!=user.about.education){
+      user.about.education = req.body.education;
+    }
+    user.save().then(()=>console.log('data changed')).catch((err)=>console.log(err));
+  }).catch((err)=>console.log(err));
+});
+
 module.exports = route;
