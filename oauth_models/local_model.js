@@ -36,7 +36,19 @@ const local_Scma = mongoose.Schema({
 
   friends:[friendsScma],
 
-  profilepick:{url:String},
+  profilepick:{
+    url:{
+      type:String,
+      default:'no link'
+    }
+  },
+
+  coverphoto:{
+    url:{
+      type:String,
+      default:'no link'
+    }
+  },
 
   images:[{filename:String}],
 

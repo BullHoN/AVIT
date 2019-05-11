@@ -19,7 +19,7 @@ nav>.row>.col>a>small{
 }
 #cover{
   height: 400px;
-  background-image: url('back1.jpg');
+  /* background-image: url('back1.jpg'); */
   min-height: 100%;
   background-repeat: no-repeat;
   background-size: cover;

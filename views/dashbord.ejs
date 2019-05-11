@@ -80,9 +80,17 @@
              </div>
            </div>
            <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
-             <div class="container-fluid" id="cover">
+             <% if(user.coverphoto.url != 'no link'){ %>
+               <div class="container-fluid" id="cover" style="background-image: url('/dashbord/image/<%= user.coverphoto.url %>');">
+             <% } else { %>
+               <div class="container-fluid" id="cover" style="background-image: url('/back1.jpg');">
+             <% } %>
              </div>
-             <img src="/lgos.png" class="rounded-circle" style="width:100px;height:100px;" id="cover_image">
+             <% if(user.profilepick.url != 'no link'){ %>
+               <img src="/dashbord/profilepick/<%= user.profilepick.url %>" class="rounded-circle" style="width:100px;height:100px;" id="cover_image">
+             <% } else { %>
+               <img src="/lgos.png" class="rounded-circle" style="width:100px;height:100px;" id="cover_image">
+             <% } %>
              <div class="row mt-5 mt-0">
                <div class="col-12 col-md-3 mt-0 mt-md-5 pt-3 text-center">
                  <h3><%= user.username %></h3>
@@ -108,18 +116,26 @@
                      <div class="tab-content" id="pills-tabContent">
                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                          <div class="row" style="max-width:100%;">
-                           <div class="col-12 col-md-6 mt-4 mt-md-0" id="user_images">
-                             <img class="mx-4 px-5 mx-md-0 px-md-0" src="/back1.jpg" data-toggle="modal" data-target="#exampleModal">
-                           </div>
-                           <div class="col-12 col-md-6 mt-4 mt-md-0" id="user_images">
-                             <img class="mx-4 px-5 mx-md-0 px-md-0" src="/back1.jpg" data-toggle="modal" data-target="#exampleModal">
-                           </div>
+                           <% if(user.images.length > 0){ %>
+                          <%   user.images.forEach((image,index)=>{ %>
                             <div class="col-12 col-md-6 mt-4" id="user_images">
-                             <img class="mx-4 px-5 mx-md-0 px-md-0" src="/back1.jpg" data-toggle="modal" data-target="#exampleModal">
-                           </div>
-                           <div class="col-12 col-md-6 mt-4" id="user_images">
-                             <img class="mx-4 px-5 mx-md-0 px-md-0" src="/back1.jpg" data-toggle="modal" data-target="#exampleModal">
-                           </div>
+                              <img class="mx-4 px-5 mx-md-0 px-md-0" src="/dashbord/profile/images/<%= image.filename %>" data-toggle="modal" data-target="#<%= 'profile_images' + index %>">
+                              <div class="modal fade" id="<%= 'profile_images' + index %>" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                  <div class="modal-content" id="image_model" style="object-fit:contain">
+                                    <div class="modal-body">
+                                       <img src="/dashbord/profile/images/<%= image.filename %>" id="user">
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          <% }) %>
+                           <% } else { %>
+                              <div class="col-12 text-center">
+                                <h3>Nothing to display</h3>
+                              </div>
+                            <% } %>
                          </div>
                        </div>
                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
@@ -139,17 +155,60 @@
            <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
            <div class="tab-pane fade" id="list-discussion" role="tabpanel" aria-labelledby="list-discussion-list">...</div>
            <div class="tab-pane fade" id="list-events" role="tabpanel" aria-labelledby="list-events-list">...</div>
-           <div class="tab-pane fade" id="list-images" role="tabpanel" aria-labelledby="list-images-list">...</div>
-           <div class="tab-pane fade" id="list-videos" role="tabpanel" aria-labelledby="list-videos-list">...</div>
-         </div>
-       </div>
-     </div>
-     <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-hidden="true">
-       <div class="modal-dialog" role="document">
-         <div class="modal-content" id="image_model" style="object-fit:contain">
-           <div class="modal-body">
-              <img src="/back1.jpg" id="user">
+           <div class="tab-pane fade" id="list-images" role="tabpanel" aria-labelledby="list-images-list">
+             <div class="container">
+               <h1 class="display-4">Welcome <%= user.username %></h1>
+               <h1 class="display-4 text-muted">Your Image Galary</h1>
+               <div class="row">
+                 <div class="col-md-6">
+                   <h1 class="mt-5">cover Image:</h1>
+                   <div class="container">
+                     <% if(user.coverphoto.url != 'no link'){ %>
+                       <img src="/dashbord/image/<%= user.coverphoto.url %>" class="mt-3" style="width:100%;height:70%;">
+                     <% } else {  %>
+                      <img src="back1.jpg" class="mt-3" style="width:50%;height:40%;">
+                     <% } %>
+                     <form class="mt-2" action="/post/image" enctype="multipart/form-data" method="post" style="width:50%;">
+                       <input type="file" name="user_cover" style="width:100%;"><br>
+                       <button type="submit" class="btn btn-primary mt-2" id="change_cover_image">Change</button>
+                     </form>
+                   </div>
+                 </div>
+                 <div class="col-md-5">
+                   <h1 class="mt-5">profile Image</h1>
+                   <div class="container">
+                     <% if(user.profilepick.url != 'no link'){ %>
+                       <img src="/dashbord/profilepick/<%= user.profilepick.url %>" alt="wtf" class="mt-3" style="width:60%;height:50%;">
+                     <% } else {  %>
+                      <img src="lgos.png" class="mt-3" alt="this one" class="mt-3"style="width:60%;height:50%;">
+                     <% } %>
+                     <form class="mt-2" action="/post/profilepick" enctype="multipart/form-data" method="post" style="width:50%;">
+                       <input type="file" name="user_cover"><br>
+                       <button type="submit" class="btn btn-primary mt-2" id="change_cover_image">Change</button>
+                     </form>
+                   </div>
+                 </div>
+               </div>
+               <h1>Beautiful Moments</h1>
+               <form class="mt-5" action="/dashbord/profile/images" method="post" enctype="multipart/form-data">
+                 <input id="profile_images" type="file" name="profile_images" multiple><br>
+                 <button type="submit" class="btn btn-primary mt-2" name="button">Upload more photos</button>
+               </form>
+               <div class="row mt-2">
+                 <% if(user.images.length > 0){ %>
+                <%   user.images.forEach((image)=>{ %>
+                      <div class="col-md-6 mt-5">
+                        <img src="/dashbord/profile/images/<%= image.filename %>" style="width:100%;height:100%;">
+                        <form action="/dashbord/profile/images/<%= image.filename %>?_method=DELETE" method="post">
+                          <button type="submit" name="button" class="btn btn-outline-danger btn-block">Delete</button>
+                        </form>
+                      </div>
+                    <% }); %>
+                 <% } %>
+               </div>
+             </div>
            </div>
+           <div class="tab-pane fade" id="list-videos" role="tabpanel" aria-labelledby="list-videos-list">...</div>
          </div>
        </div>
      </div>
