@@ -200,7 +200,7 @@
                       <%= add.name %>
                     </a>
                   <% active=false; %>
-              <%   } else{ %>   
+              <%   } else{ %>
                     <a href="#<%= add.name %>_chat" class="list-group-item list-group-action" data-toggle="list" role="tab">
                       <% if(add.profilepick != 'no link') { %>
                         <span><img src="/dashbord/profilepick/<%= add.profilepick %>" style="width:50px;height:50px;border-radius:50%;"></span>
@@ -251,7 +251,22 @@
                   <%  } else { %>
                     <div class="tab-pane chatroom" id="<%= add.name %>_chat" role="tabpanel">
                       <div class="main_chats">
-                        <h5><%= add.name %></h5>
+                        <h5><%= add.name %></h5><br><br>
+                         <% user.messages.forEach((mssg)=>{ %>
+                          <% if(mssg.with == add.name){ %>
+                              <% if(mssg.messages.length>0){ %>
+                                <% mssg.messages.forEach((print)=>{ %>
+                                  <% if(print.isUser){ %>
+                                     <h2 class="bg-primary text-white messgage_edit" style="font-size: 1.4rem;float:right;margin-right:50px;"><%= print.message %></h2><br><br><br>
+                                   <% } else { %>
+                                     <h2 class="bg-dark text-white messgage_edit" style="font-size: 1.4rem;float:left;margin-left:30px;"><%= print.message %></h2><br><br><br>
+                                    <% } %>
+                              <% }); %>
+                            <% } else { %>
+                                 <h5>No message to display</h5>
+                            <% } %>
+                        <%  } %>
+                    <% }); %>
                       </div>
                       <form>
                         <div class="input-group">
