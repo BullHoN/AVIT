@@ -49,6 +49,22 @@ const storage = new GridFsStorage({
               user.profilepick.url = filename;
               user.save().catch((err)=>console.log(err));
             }
+            user.friends.forEach((friend)=>{
+              if(friend.isAccepted){
+                User.findOne({username:friend.name}).then((friend1)=>{
+                  if(friend1){
+                    console.log(friend1);
+                    friend1.friends.forEach((image)=>{
+                      if(image.name == user.username){
+                        console.log(image + 'zeher error');
+                        image.profilepick = filename;
+                      }
+                    });
+                    friend1.save().then(()=>console.log('image updated for his friends')).catch((err)=>console.log(err));
+                  }
+                });
+              }
+            });
           }
         }).catch((err)=>console.log(err));
         resolve(fileInfo);

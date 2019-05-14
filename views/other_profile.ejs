@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+     <link rel="stylesheet" href="/user_serach_css.css">
+    <title><%= user.username %></title>
+  </head>
+  <body class="bg-light">
+    <nav class="navbar sticky-top bg-white shadow-sm">
+      <div class="row  mx-auto" style="width:100%">
+        <div class="col ">
+          <a href="#home" class="navbar-brand ml-0 ml-md-3 mx-auto">
+           <img src="/fnlg.png">
+           <small>(Asynchronous versatility)</small>
+          </a>
+        </div>
+        <div class="col-6 col-md mt-2 ml-0 ml-md-5">
+          <form class="form-inline">
+            <div class="input-group" style="width:400px;">
+              <div class="input-group-prepend mt-2 mr-2" style="font-size:1.4rem;">
+                <i class="fas fa-search text-muted"></i>
+              </div>
+              <input class="form-control" style="border:none;" type="search" name="search" placeholder="search...">
+            </div>
+          </form>
+        </div>
+        <div class="col text-right mt-2">
+           <a href="#" style="font-size: 1.5rem;"><span class="far fa-bell"></span></a>
+        </div>
+        <div class="col ml-5 mt-2">
+          <div class="dropdown dropleft">
+            <img class="dropdown-toggle rounded-circle" style="width:40px;heigth:40px;" src="/lgos.png" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+           <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/dashbord">Dashbord</a>
+              <a class="dropdown-item" href="#">Profile Setting</a>
+              <a class="dropdown-item" href="/logout">Logout</a>
+           </div>
+         </div>
+        </div>
+      </div>
+    </nav>
+    <% if(user.coverphoto.url != 'no link'){ %>
+      <div class="container" id="cover" style="background-image: url('/dashbord/image/<%= user.coverphoto.url %>');">
+        <% if(user.profilepick.url != 'no link'){ %>
+          <img src="/dashbord/profilepick/<%= user.profilepick.url %>" id="cover_image">
+        <% } else { %>
+          <img src="/lgos.png" id="cover_image">
+        <% } %>
+    <% } else { %>
+      <div class="container" id="cover" style="background-image: url('/back1.jpg');">
+        <% if(user.profilepick.url != 'no link'){ %>
+          <img src="/dashbord/profilepick/<%= user.profilepick.url %>" id="cover_image">
+        <% } else { %>
+          <img src="/lgos.png" id="cover_image">
+        <% } %>
+    <% } %>
+    </div>
+    <!-- <div class="container mt-3" id="cover">
+      <img src="lgos.png" id="cover_image">
+    </div> -->
+    <br><br><br>
+    <div class="container">
+      <div class="row" style="max-width:100%;">
+        <div class="col-md-4 text-center">
+          <h3 id="unique_username"><%= user.username %></h3>
+          <p class="text-muted mb-0">I am a <%= user.about.achivements %></p>
+          <p class="text-muted mt-0"><%= user.email %></p>
+          <hr class="mx-5 mx-md-0">
+          <p class="text-muted px-5 px-md-0">Hi my name is <%= user.username %> i  am  a <%= user.about.achivements %> i love doing <%= user.about.hobbies %> learn more about me in about</p>
+        </div>
+        <div class="col-md-8">
+          <div class="row" style="max-width: 100%;">
+            <div class="col-12 col-md">
+              <ul class="nav mt-3 mt-md-0 w-100 justify-content-center nav-pills mb-3" id="pills-tab" role="tablist">
+                <li class="nav-item pl-5 pl-md-0">
+                  <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Images</a>
+                </li>
+                <li class="nav-item ml-3 ml-md-5">
+                  <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Videos</a>
+                </li>
+                <li class="nav-item ml-3 ml-md-5">
+                  <a class="nav-link" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="false">About</a>
+                </li>
+                <li class="nav-item ml-3 ml-md-5 mt-3 mt-md-0">
+                  <% let flag=false %>
+                  <% user.friends.forEach((btn)=>{ %>
+                <%  if(btn.name == main_user.username){ %>
+                  <%    flag=true; %>
+                  <%    if(btn.isAccepted){ %>
+                      <button type="button" class="btn btn-outline-danger" name="button">Remove Freind</button>
+                    <% }else{ %>
+                      <button type="button" class="btn btn-outline-primary" name="button" disabled>Request Send</button>
+                    <% } %>
+                  <% } %>
+                <% }); %>
+                  <% if(!flag){ %>
+                    <button type="button" class="btn btn-outline-primary" name="button">Add Freind</button>
+                  <% } %>
+                </li>
+              </ul>
+              <div class="tab-content" id="pills-tabContent">
+                <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                  <div class="row" style="max-width:100%;">
+                    <% if(user.images.length > 0){ %>
+                   <%   user.images.forEach((image,index)=>{ %>
+                     <div class="col-12 col-md-6 mt-4" id="user_images">
+                       <img class="mx-4 px-5 mx-md-0 px-md-0" src="/dashbord/profile/images/<%= image.filename %>" data-toggle="modal" data-target="#<%= 'profile_images' + index %>">
+                       <div class="modal fade" id="<%= 'profile_images' + index %>" tabindex="-1" role="dialog" aria-hidden="true">
+                         <div class="modal-dialog" role="document">
+                           <div class="modal-content" id="image_model" style="object-fit:contain">
+                             <div class="modal-body">
+                                <img src="/dashbord/profile/images/<%= image.filename %>" id="user">
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+                     </div>
+                   <% }) %>
+                    <% } else { %>
+                       <div class="col-12 text-center">
+                         <h3>Nothing to display</h3>
+                       </div>
+                     <% } %>
+                  </div>
+                </div>
+                <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                 <!-- <video src="video_test.mp4" style="width:300px;height:300px;" data-toggle="modal" data-target="video_modal">
+                 </video> -->
+                 in development...
+                </div>
+                <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                    user bio data which he would like to share
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      const friend = document.querySelector('.nav-item button');
+      const username = document.querySelector('#unique_username').textContent;
+      friend.addEventListener('click',(e)=>{
+        e.preventDefault();
+        $.ajax({
+          url: '/dashbord/addfriend',
+          type: 'POST',
+          data: {from:username},
+          success: function(data){
+            e.target.textContent = 'request sended'
+            e.target.classList.add('disabled');
+            e.target.disabled = true;
+            console.log(data);
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

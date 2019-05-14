@@ -4,11 +4,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/emojionearea/3.4.1/emojionearea.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
     <link rel="stylesheet" href="/dashbord_css.css">
     <title>Dashbord</title>
   </head>
@@ -32,7 +34,28 @@
            </form>
          </div>
          <div class="col text-right mt-2">
-            <a href="#" style="font-size: 1.5rem;"><span class="far fa-bell"></span></a>
+           <span style="font-size: 1.5rem;" class="far fa-bell dropdown-toggle" id="notification" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               <% user.friends.forEach((btn)=>{ %>
+              <%   if(!btn.isAccepted){ %>
+                 <span class="badge badge-primary">1</span>
+             <%  } %>
+            <%  }); %>
+           </span>
+           <div class="dropdown-menu" aria-labelledby="notification" style="min-width:400px;">
+             <ul class="list-group">
+               <% if(user.friends.length < 1) { %>
+                 <li class="list-group-item">You don't have notification yet</li>
+              <% } else { %>
+                <% user.friends.forEach((btn)=>{ %>
+               <%   if(!btn.isAccepted){ %>
+                  <li class="list-group-item">You got request from @<%= btn.name %> <button class="btn btn-outline-success ml-2 accept_request">Accept</button></li>
+              <%  } else { %>
+                  <li class="list-group-item">You are now freind of @<%= btn.name %></li>
+            <% }%>
+             <%  }); %>
+            <% } %>
+             </ul>
+           </div>
          </div>
          <div class="col ml-5 mt-2">
            <div class="dropdown dropleft">
@@ -40,12 +63,16 @@
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                <a class="dropdown-item" href="/dashbord">Dashbord</a>
                <a class="dropdown-item" href="/profile">Profile Setting</a>
-               <a class="dropdown-item" href="/logout">Logout</a>
+               <a class="dropdown-item" href="/logout" id="socket_disconnect">Logout</a>
             </div>
           </div>
          </div>
        </div>
      </nav>
+     <div class="items bg-white text-center">
+       <ul class="list-group">
+       </ul>
+     </div>
      <div class="row mt-5" style="max-width:100%;">
        <div class="col-6 col-md-3">
          <div class="list-group" id="list-tab" role="tablist" style="border-right:1px solid #e6e6e6;">
@@ -53,7 +80,7 @@
            <a class="list-group-item list-group-item-action active" id="list-home-list" data-toggle="list" href="#list-home" role="tab" aria-controls="home">Home</a>
            <a class="list-group-item list-group-item-action" id="list-profile-list" data-toggle="list" href="#list-profile" role="tab" aria-controls="profile">Profile</a>
            <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-messages" role="tab" aria-controls="messages">Friends</a>
-           <a class="list-group-item list-group-item-action" id="list-messages-list" data-toggle="list" href="#list-discussion" role="tab" aria-controls="discussion">Discusion</a>
+           <a class="list-group-item list-group-item-action" id="list-discussion-list" data-toggle="list" href="#list-discussion" role="tab" aria-controls="discussion">Discusion</a>
            <a class="list-group-item list-group-item-action" id="list-events-list" data-toggle="list" href="#list-events" role="tab" aria-controls="events">Events</a>
            <a class="list-group-item list-group-item-action" id="list-images-list" data-toggle="list" href="#list-images" role="tab" aria-controls="images">Images</a>
            <a class="list-group-item list-group-item-action" id="list-videos-list" data-toggle="list" href="#list-videos" role="tab" aria-controls="events">Videos</a>
@@ -93,7 +120,7 @@
              <% } %>
              <div class="row mt-5 mt-0">
                <div class="col-12 col-md-3 mt-0 mt-md-5 pt-3 text-center">
-                 <h3><%= user.username %></h3>
+                 <h3 id="unique_username"><%= user.username %></h3>
                  <p class="text-muted mb-0">I am a <%= user.about.achivements %></p>
                  <p class="text-muted mt-0"><%= user.email %></p>
                  <hr class="mx-5 mx-md-0">
@@ -152,7 +179,87 @@
                </div>
              </div>
            </div>
-           <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+           <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+             <div class="container text-center text-primary">
+               <h1 class="display-2">Messages</h1>
+             </div>
+             <div class="row mt-5 mb-5" style="max-width: 100%;">
+               <div class="col-4">
+                 <div class="list-group" id="friends_chat" role="tablist">
+              <% let active=true %>
+            <% if(user.friends.length>0){ %>
+            <% user.friends.forEach((add)=>{ %>
+              <%  if(add.isAccepted){ %>
+                   <% if(active){ %>
+                    <a href="#<%= add.name %>_chat" class="list-group-item list-group-action active" data-toggle="list" role="tab">
+                      <% if(add.profilepick != 'no link') { %>
+                        <span><img src="/dashbord/profilepick/<%= add.profilepick %>" style="width:50px;height:50px;border-radius:50%;"></span>
+                  <%  } else { %>
+                        <span><img src="/lgos.png" style="width:50px;height:50px;border-radius:50%;"></span>
+                <%  } %>
+                      <%= add.name %>
+                    </a>
+                  <% active=false; %>
+              <%   } else{ %>
+                    <a href="#<%= add.name %>_chat" class="list-group-item list-group-action" data-toggle="list" role="tab"><%= add.name %></a>
+                <% } %>
+              <%  } %>
+            <%  }); %>
+        <%  } else { %>
+              <h5>You don't have any friends</h5>
+        <% } %>
+                  </div>
+                </div>
+              <div class="col-8">
+                <div class="tab-content">
+                  <% if(user.friends.length>0){ %>
+                  <% user.friends.forEach((add,index)=>{ %>
+                      <% if(index==0) { %>
+                        <div class="tab-pane show active chatroom" id="<%= add.name %>_chat" role="tabpanel">
+                          <div class="main_chats">
+                          <h5><%= add.name %></h5><br><br>
+                           <% user.messages.forEach((mssg)=>{ %>
+                            <% if(mssg.with == add.name){ %>
+                                <% if(mssg.messages.length>0){ %>
+                                  <% mssg.messages.forEach((print)=>{ %>
+                                    <% if(print.isUser){ %>
+                                       <h2 class="bg-primary text-white messgage_edit" style="font-size: 1.4rem;float:right;margin-right:50px;"><%= print.message %></h2><br><br><br>
+                                     <% } else { %>
+                                       <h2 class="bg-dark text-white messgage_edit" style="font-size: 1.4rem;float:left;margin-left:30px;"><%= print.message %></h2><br><br><br>
+                                      <% } %>
+                                <% }); %>
+                              <% } else { %>
+                                   <h5>No message to display</h5>
+                              <% } %>
+                          <%  } %>
+                      <% }); %>
+                          </div>
+                          <form>
+                            <div class="input-group">
+                              <input type="text" class="form-control emogi" name="message_new" placeholder="send message.." contentEditable="true" hidefocus="true" required>
+                            </div>
+                            <button type="submit" class="btn btn-outline-secondary btn-block mt-0" id="send_private_message">Send</button>
+                          </form>
+                        </div>
+                  <%  } else { %>
+                    <div class="tab-pane chatroom" id="<%= add.name %>_chat" role="tabpanel">
+                      <div class="main_chats">
+                        <h5><%= add.name %></h5>
+                      </div>
+                      <form>
+                        <div class="input-group">
+                          <input type="text" class="form-control emogi" name="message_new" placeholder="send message.." contentEditable="true" hidefocus="true" required>
+                        </div>
+                        <button type="submit" class="btn btn-outline-secondary btn-block mt-0" id="send_private_message">Send</button>
+                      </form>
+                    </div>
+                <% } %>
+                  <% }); %>
+                <% } %>
+                </div>
+              </div>
+            </div>
+           </div>
            <div class="tab-pane fade" id="list-discussion" role="tabpanel" aria-labelledby="list-discussion-list">...</div>
            <div class="tab-pane fade" id="list-events" role="tabpanel" aria-labelledby="list-events-list">...</div>
            <div class="tab-pane fade" id="list-images" role="tabpanel" aria-labelledby="list-images-list">
@@ -222,6 +329,7 @@
          </div>
        </div>
      </div> -->
+     <button class="accept_request" style="display: none;" type="button" name="button"></button>
      <script src="/dashbord_java.js">
      </script>
   </body>

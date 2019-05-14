@@ -1,10 +1,6 @@
 const mongoose = require('mongoose');
 
 
-const friendsScma = mongoose.Schema({
-  accepted:[{name:String}],
-  pending:[{name:String}]
-});
 
 const projectScma = mongoose.Schema({
   title:String
@@ -34,7 +30,21 @@ const local_Scma = mongoose.Schema({
   },
   todos:[{title:String,desc:String}],
 
-  friends:[friendsScma],
+  friends:[{
+    name:String,
+    isAccepted:{
+      type:Boolean
+    },
+    profilepick:String
+  }],
+
+  messages:[{
+    with:String,
+    messages:[{
+      message:String,
+      isUser:Boolean
+    }]
+  }],
 
   profilepick:{
     url:{
