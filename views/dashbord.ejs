@@ -200,8 +200,15 @@
                       <%= add.name %>
                     </a>
                   <% active=false; %>
-              <%   } else{ %>
-                    <a href="#<%= add.name %>_chat" class="list-group-item list-group-action" data-toggle="list" role="tab"><%= add.name %></a>
+              <%   } else{ %>   
+                    <a href="#<%= add.name %>_chat" class="list-group-item list-group-action" data-toggle="list" role="tab">
+                      <% if(add.profilepick != 'no link') { %>
+                        <span><img src="/dashbord/profilepick/<%= add.profilepick %>" style="width:50px;height:50px;border-radius:50%;"></span>
+                  <%  } else { %>
+                        <span><img src="/lgos.png" style="width:50px;height:50px;border-radius:50%;"></span>
+                <%  } %>
+                      <%= add.name %>
+                    </a>
                 <% } %>
               <%  } %>
             <%  }); %>
